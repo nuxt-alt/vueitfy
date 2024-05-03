@@ -70,8 +70,8 @@ export default defineNuxtModule({
 
         addPluginTemplate({
             getContents({ options }) {
-              const contents = readFileSync(resolve('./runtime/templates/plugin.mjs'), 'utf-8')
-              return template(contents)({ options })
+                const contents = readFileSync(resolve('./runtime/templates/plugin.mjs'), 'utf-8')
+                return template(contents)({ options })
             },
             filename: 'vuetify.plugin.mjs',
             options: options.vuetifyOptions
