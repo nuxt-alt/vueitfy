@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { template } from 'lodash-es'
 import type { ModuleOptions } from './types';
 import type { Nuxt } from '@nuxt/schema'
 import { name, version } from '../package.json';
@@ -67,7 +69,10 @@ export default defineNuxtModule({
         }
 
         addPluginTemplate({
-            src: resolve('./runtime/templates/plugin.mjs'),
+            getContents({ options }) {
+              const contents = readFileSync(resolve('./runtime/templates/plugin.mjs'), 'utf-8')
+              return template(contents)({ options })
+            },
             filename: 'vuetify.plugin.mjs',
             options: options.vuetifyOptions
         })
